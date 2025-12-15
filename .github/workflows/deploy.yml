@@ -37,4 +37,6 @@ jobs:
         run: |
           terraform apply -auto-approve \
             -var="image_uri=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${{ github.event.inputs.image_tag }}" \
-            -var="execution_role=arn:aws:iam::${AWS_ACCOUNT_ID}:role/ecsTaskExecutionRole"
+            -var="execution_role_arn=arn:aws:iam::${AWS_ACCOUNT_ID}:role/ecsTaskExecutionRole" \
+            -var="subnets=${{ secrets.ECS_SUBNETS }}" \
+            -var="security_group_id=${{ secrets.ECS_SECURITY_GROUP }}"
